@@ -22,7 +22,7 @@ ruleTester.run("no-clr-button", rule, {
               })
               export class CustomButtonComponent {
               }
-            `
+            `,
         ),
         getInvalidTest(
             `
@@ -34,7 +34,7 @@ ruleTester.run("no-clr-button", rule, {
               })
               export class CustomButtonComponent {
               }
-            `
+            `,
         ),
 
     ],
@@ -53,7 +53,7 @@ ruleTester.run("no-clr-button", rule, {
                     <button class="btn btn-primary custom-class">Primary</button>
                   \`;
               }
-            `
+            `,
     ],
 });
 

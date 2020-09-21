@@ -1,6 +1,6 @@
 import noClrButton from "./rules/no-clr-button";
 
-export default {
+module.exports = {
     rules: {
         "no-clr-button": noClrButton,
     },

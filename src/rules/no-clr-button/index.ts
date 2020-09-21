@@ -37,11 +37,11 @@ export default createESLintRule({
                 }
 
                 const root = parse(templateContent);
-                const clrButton = root.querySelector('button.btn.btn-primary');
+                const clrButton = root.querySelector("button.btn.btn-primary");
                 if (clrButton) {
                     context.report({
                         node,
-                        messageId: "clrButtonFailure"
+                        messageId: "clrButtonFailure",
                     });
                 }
             },
