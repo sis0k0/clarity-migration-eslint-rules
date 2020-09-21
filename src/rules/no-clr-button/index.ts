@@ -51,7 +51,7 @@ export default createESLintRule({
                 const clrButton = root.querySelector("button.btn.btn-primary");
                 if (clrButton) {
                     context.report({
-                        node,
+                        node: templateContentNode,
                         messageId: "clrButtonFailure",
                     });
                 }
