@@ -34,11 +34,12 @@ npm install -D eslint-plugin-clarity-migration
 5. Install the other linter dependencies
 
 ```bash
-npm i -D  @typescript-eslint/parser eslint
+npm i -D @typescript-eslint/parser eslint-html-parser eslint
 ```
 
-6. Add `.eslintrc` config file with the following:
+6. Add ESLint configuration for TypeScript and HTML.
 
+**.eslintrc.json**
 ```json
 {
     "parser": "@typescript-eslint/parser",
@@ -48,12 +49,31 @@ npm i -D  @typescript-eslint/parser eslint
     "plugins": ["clarity-migration"],
     "rules": {
         "clarity-migration/no-clr-button": "error"
-    }
+    },
+    "overrides": [
+        {
+            "files": ["*.html"],
+            "parser": "eslint-html-parser"
+        }
+    ]
 }
 ```
 
 7. Lint the project
 
+```bash
+# Lint both the TypeScript and HTML files
+npx eslint --ext=ts,html src/
 ```
-npx eslint --ext=ts src/
+
+8. To republish the package without bumping the version, first unpublish it from the repository:
+
+```bash
+npm unpublish --registry http://localhost:4873 eslint-plugin-clarity-migration --force
+```
+
+Then, publish it anew:
+
+```bash
+npm publish --registry http://localhost:4873
 ```

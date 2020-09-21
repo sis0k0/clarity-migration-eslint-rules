@@ -1,14 +1,44 @@
 import rule from "../src/rules/no-clr-button";
 import { RuleTester } from "./test-helper";
 
-const ruleTester = new RuleTester({
+const tsRuleTester = new RuleTester({
     parserOptions: {
         sourceType: "module",
     },
     parser: "@typescript-eslint/parser",
 });
 
-ruleTester.run("no-clr-button", rule, {
+const htmlRuleTester = new RuleTester({
+    parserOptions: {
+        sourceType: "module",
+    },
+    parser: "eslint-html-parser",
+});
+
+htmlRuleTester.run("no-clr-button", rule, {
+    invalid: [
+        getInvalidTest(`
+            <button class="btn btn-primary">Shalqlq</button>
+        `),
+        getInvalidTest(`
+            <div>
+                <button class="btn btn-primary">Shalqlq</button>
+            </div>
+        `),
+        // TODO: The HTML parser can't handle this case.
+        // It traverses only the first tag.
+        // getInvalidTest(`
+        //     <div></div>
+        //     <button class="btn btn-primary">Shalqlq</button>
+        // `),
+    ],
+    valid: [
+        `<button class="shalqlq">Le button</button>`,
+        `<div></div>`,
+    ],
+});
+
+tsRuleTester.run("no-clr-button", rule, {
     invalid: [
         getInvalidTest(
             `

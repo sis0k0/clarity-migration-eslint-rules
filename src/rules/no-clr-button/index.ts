@@ -1,6 +1,7 @@
 import { ESLintUtils, TSESTree } from "@typescript-eslint/experimental-utils";
 import { parse } from "node-html-parser";
 import { getDecoratorPropertyValue } from "../utils";
+import { HTMLElement } from "eslint-html-parser";
 
 export const createESLintRule = ESLintUtils.RuleCreator(() => ``);
 
@@ -24,6 +25,16 @@ export default createESLintRule({
     defaultOptions: [{}],
     create(context) {
         return {
+            "HTMLElement[tagName='button']"(node: HTMLElement) {
+                const classNode = node.attributes?.find(attribute => attribute.attributeName.value === "class");
+                const classes = classNode?.attributeValue?.value?.split(" ");
+                if (classes?.includes("btn") && classes.includes("btn-primary")) {
+                    context.report({
+                        node: <any>node,
+                        messageId: "clrButtonFailure",
+                    });
+                }
+            },
             "ClassDeclaration > Decorator"(node: TSESTree.Decorator) {
                 const template = getDecoratorPropertyValue(node, "template");
                 if (template?.type !== "TemplateLiteral") {
