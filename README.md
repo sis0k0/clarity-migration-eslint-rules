@@ -77,3 +77,8 @@ Then, publish it anew:
 ```bash
 npm publish --registry http://localhost:4873
 ```
+
+# Demo app
+
+- Angular application - https://github.com/sis0k0/clarity-linter-demo
+You need to clone the linter plugin and install it to a local repository (see the steps above).
